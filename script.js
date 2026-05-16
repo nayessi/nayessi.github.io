@@ -1,5 +1,7 @@
-const titleElement = document.getElementById('typed-title');
-const subtitleElement = document.getElementById('typed-subtitle');
+const titleSpan = document.getElementById('typed-title');
+const subtitleSpan = document.getElementById('typed-subtitle');
+const titleCursor = document.querySelector('.title-cursor');
+const subtitleCursor = document.querySelector('.subtitle-cursor');
 
 const titleText = "nayessi";
 const subtitleText = "Developer in the making";
@@ -7,52 +9,33 @@ const subtitleText = "Developer in the making";
 let titleIndex = 0;
 let subtitleIndex = 0;
 
-function addCursorTo(element) {
-    
-    const oldCursor = element.parentNode.querySelector('.typed-cursor');
-    if (oldCursor) oldCursor.remove();
-    
-    const cursor = document.createElement('span');
-    cursor.className = 'typed-cursor';
-    element.parentNode.insertBefore(cursor, element.nextSibling);
-}
-
-function removeCursorFrom(element) {
-    const cursor = element.parentNode.querySelector('.typed-cursor');
-    if (cursor) cursor.remove();
-}
-
 function typeTitle() {
-    if (titleIndex === 0) {
-        addCursorTo(titleElement);
-    }
-    
     if (titleIndex < titleText.length) {
-        titleElement.textContent += titleText.charAt(titleIndex);
+        titleSpan.textContent += titleText.charAt(titleIndex);
         titleIndex++;
         setTimeout(typeTitle, 100);
     } else {
-        removeCursorFrom(titleElement);
+        titleCursor.style.animation = 'none';
+        titleCursor.style.opacity = '0';
         startTypeSubtitle();
     }
 }
 
 function typeSubtitle() {
-    if (subtitleIndex === 0) {
-        addCursorTo(subtitleElement);
-    }
-    
     if (subtitleIndex < subtitleText.length) {
-        subtitleElement.textContent += subtitleText.charAt(subtitleIndex);
+        subtitleSpan.textContent += subtitleText.charAt(subtitleIndex);
         subtitleIndex++;
         setTimeout(typeSubtitle, 70);
     } else {
-        removeCursorFrom(subtitleElement);
+        subtitleCursor.style.animation = 'none';
+        subtitleCursor.style.opacity = '0';
     }
 }
 
 function startTypeSubtitle() {
-    typeSubtitle();
+    // Показываем курсор подзаголовка
+    subtitleCursor.style.display = 'inline-block';
+    setTimeout(typeSubtitle, 300);
 }
 
 typeTitle();
