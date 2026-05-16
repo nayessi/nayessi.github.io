@@ -33,7 +33,6 @@ function typeSubtitle() {
 }
 
 function startTypeSubtitle() {
-    // Показываем курсор подзаголовка
     subtitleCursor.style.display = 'inline-block';
     setTimeout(typeSubtitle, 300);
 }
